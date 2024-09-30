@@ -10,8 +10,8 @@ const items = ref([
   { id: '6', label: '1 pc gamer' }
 ])
 const newItem = ref('')
-const newItemPriority = ref('low');
 const newItemHighPriority = ref(false);
+const iceCreamFlavors = ref([]);
 </script>
 
 <template>
@@ -22,14 +22,27 @@ const newItemHighPriority = ref(false);
   </h1>
   <input type="text" placeholder="Add Item" v-model.trim="newItem">
 <!-- Radio Buttons -->
+<!-- Caja de seleccion de prioridad -->
 <label>
-  <input type="checkbox" v-model="newItemHighPriority">Alta Prioridad
-</label>
-{{ newItem }}
-...
+    <input type="checkbox" v-model="newItemHighPriority">
+    High Priority
+  </label>
+  <!-- Helados -->
+  <label>
+		<input type="checkbox" v-model="iceCreamFlavors" value="vanilla">
+		Vanilla
+	</label>
+  <label>
+		<input type="checkbox" v-model="iceCreamFlavors" value="chocolate">
+		Chocolate
+	</label>
+  <label>
+		<input type="checkbox" v-model="iceCreamFlavors" value="strawnerry">
+		Strawberry
+	</label>
+  {{iceCreamFlavors}}
+  <!-- Lista -->
 
-  {{ newItemHighPriority == '' ? 'true' : 'false'}}
-  <!--ul>li*3 es el lenguaje emet a usar-->
   <ul>
     <li v-for="item in items" :key="item.id">🛒 {{ item.label }}</li>
   </ul>
