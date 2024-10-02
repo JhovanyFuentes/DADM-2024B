@@ -1,50 +1,53 @@
 <script setup>
 import { ref } from 'vue'
+// Modelo
 const header = ref('App lista de compras')
+//----- Item -----
+//Item-Mode
 const items = ref([
-  { id: '1', label: '10 bolillos' },
-  { id: '2', label: '1 lata de frijoles' },
-  { id: '3', label: '1 chela' },
-  { id: '4', label: '1 nutella' },
-  { id: '5', label: '1 lata de atun' },
-  { id: '6', label: '1 pc gamer' }
-])
+  { id: '0', label: '10 bolillos' },
+  { id: '1', label: '1 lata frijoles' },
+  { id: '2', label: '1 chelas' },
+  { id: '3', label: '1 Nutella' }
+]);
+//Item-Method
+const saveItem = () => {
+  //Add new item
+  items.value.push({id: items.value.length+1, laable: newItem.value});
+  //Clean the Input
+  newItem.value='';
+};
+
 const newItem = ref('')
-const newItemHighPriority = ref(false);
-const iceCreamFlavors = ref([]);
+const newItemPriority = ref(false)
+
+//Methods
 </script>
 
 <template>
   <h1>
-    <!--agregamos un icono al codigo a un costado del header-->
     <i class="material-icons shopping-cart-icon">local_mall</i>
     {{ header }}
   </h1>
-  <input type="text" placeholder="Add Item" v-model.trim="newItem">
-<!-- Radio Buttons -->
-<!-- Caja de seleccion de prioridad -->
-<label>
-    <input type="checkbox" v-model="newItemHighPriority">
-    High Priority
-  </label>
-  <!-- Helados -->
-  <label>
-		<input type="checkbox" v-model="iceCreamFlavors" value="vanilla">
-		Vanilla
-	</label>
-  <label>
-		<input type="checkbox" v-model="iceCreamFlavors" value="chocolate">
-		Chocolate
-	</label>
-  <label>
-		<input type="checkbox" v-model="iceCreamFlavors" value="strawnerry">
-		Strawberry
-	</label>
-  {{iceCreamFlavors}}
-  <!-- Lista -->
+  <!-- Agrupando Entradas de usuario -->
+  <form
+    class="add-item form"
+    v-on:submit.prevent="saveItem()"
+  >
+    <!-- Entrada de texto-->
+    <input v-model.trim="newItem" type="text" placeholder="Agregar articulo" />
+    <!-- Radio Buttos -->
+    <label>
+      <input type="radio" value="low" v-model="newItemPriority" />
+      Alta Prioridad
+    </label>
 
+    <!-- Boton -->
+    <button class="btn btn-primary">Salvar Articulo</button>
+  </form>
+  <!-- Lista -->
   <ul>
-    <li v-for="item in items" :key="item.id">🛒 {{ item.label }}</li>
+    <li v-for="item in items" v-bind:key="item.id">🛍️ {{ item.label }}</li>
   </ul>
 </template>
 
