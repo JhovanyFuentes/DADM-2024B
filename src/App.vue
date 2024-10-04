@@ -29,11 +29,14 @@ const activateEdition = (activate) => {
   <div class="header">
     <h1>
       <i class="material-icons shopping-cart-icon"> local_mall </i>
-      {{ header }}
+      {{ header }} 
     </h1>
     <button v-if="editing" class="btn" @click="activateEdition(false)">Cancelar</button>
     <button v-else class="btn btn-primary" @click="activateEdition(true)">Agregar Artiuculo</button>
   </div>
+  <!--Colocando un hyperlink-->
+  <a v-bind:href="'https://' + newItem"  target="_blank">{{newItem == "" ? "🔗 Link" : newItem}} </a>
+  {{ 'https://' + newItem }}
   <!-- Agrupando Entradas de usuario -->
   <form class="add-item form" v-if="editing" v-on:submit.prevent="saveItems()">
     <!-- Entrada de texto-->
