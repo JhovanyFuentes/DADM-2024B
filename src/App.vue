@@ -5,10 +5,10 @@ const header = ref('App lista de compras')
 const items = ref([
   //---Items------
   //Item-Model
-  { id: '0', label: '10 bolillos' },
-  { id: '1', label: '1 lata frijoles' },
-  { id: '2', label: '1 chelas' },
-  { id: '3', label: '1 Nutella' }
+  { id: '0', label: '10 bolillos', purchased: false, priority: false},
+  { id: '1', label: '1 lata frijoles', purchased: true, priority: true},
+  { id: '2', label: '1 chelas' , purchased: false, priority: false},
+  { id: '3', label: '1 Nutella', purchased: true, priority: true}
 ])
 // Item-Method
 const saveItems = () => {
@@ -16,23 +16,21 @@ const saveItems = () => {
   // clean the input
   newItem.value = ''
 }
-// ----- Formulario -----
 const newItem = ref('')
-const newItemPriority = ref(false)
+const newItemPriority = ref('false')
 const editing = ref(true)
 const activateEdition = (activate) => {
   editing.value = activate
 }
-// ----- Eventos -----
 </script>
 <template>
   <div class="header">
     <h1>
-      <i class="material-icons shopping-cart-icon"> local_mall </i>
-      {{ header }} 
+      <i class="material-icons shopping-cart-icon">local_mall</i>
+      {{ header }} <span style="color: blue">{{ newItemPriority }}</span>
     </h1>
     <button v-if="editing" class="btn" @click="activateEdition(false)">Cancelar</button>
-    <button v-else class="btn btn-primary" @click="activateEdition(true)">Agregar Artiuculo</button>
+    <button v-else class="btn btn-primary" @click="activateEdition(true)">Agregar Articulo</button>
   </div>
   <!-- Agrupando Entradas de usuario -->
   <form class="add-item form" v-if="editing" v-on:submit.prevent="saveItems()">
@@ -44,13 +42,20 @@ const activateEdition = (activate) => {
       Alta Prioridad
     </label>
     <!-- Boton -->
-    <button :disabled="newItem.length===0" class="btn btn-primary">Salvar Articulo</button>
+    <button 
+    :disabled="newItem.length === 0"
+    class="btn btn-primary">Salvar Articulo</button>
   </form>
   <!-- Lista -->
   <ul>
-    <li v-for="item in items" v-bind:key="item.id">🛒{{ item.label }}</li>
+    <li v-for="{label, id, purchased, priority} in items" 
+    :key="id"
+    :class="{ strikeout: purchased, priority: priority, amazing: true}"
+    class="amazing">
+    {{ priority ? "🔥" : "🛒" }} {{ label }}
+  </li>
   </ul>
-  <p v-if="items.length === 0">🥀 NO HAY ELEMENTOS EN LA LISTA 🥀</p>
+  <p v-if="items.length === 0">🥀 NO HAY ELEMENTOS AGREGADOS</p>
 </template>
 <style scoped>
 .shopping-cart-icon {
