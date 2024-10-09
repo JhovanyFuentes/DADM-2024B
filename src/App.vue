@@ -34,9 +34,6 @@ const activateEdition = (activate) => {
     <button v-if="editing" class="btn" @click="activateEdition(false)">Cancelar</button>
     <button v-else class="btn btn-primary" @click="activateEdition(true)">Agregar Artiuculo</button>
   </div>
-  <!--Colocando un hyperlink-->
-  <a v-bind:href="'https://' + newItem"  target="_blank">{{newItem == "" ? "🔗 Link" : newItem}} </a>
-  {{ 'https://' + newItem }}
   <!-- Agrupando Entradas de usuario -->
   <form class="add-item form" v-if="editing" v-on:submit.prevent="saveItems()">
     <!-- Entrada de texto-->
@@ -47,7 +44,7 @@ const activateEdition = (activate) => {
       Alta Prioridad
     </label>
     <!-- Boton -->
-    <button class="btn btn-primary">Salvar Articulo</button>
+    <button :disabled="newItem.length===0" class="btn btn-primary">Salvar Articulo</button>
   </form>
   <!-- Lista -->
   <ul>
