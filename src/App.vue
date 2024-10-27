@@ -21,6 +21,10 @@ const newItemPriority = ref('false')
 const editing = ref(true)
 const activateEdition = (activate) => {
   editing.value = activate
+  // Alternando estado de compra del item
+  const togglePurchased = (item) => {
+    item.purchased = !item.purchased;
+  }
 }
 </script>
 <template>
@@ -57,24 +61,25 @@ const activateEdition = (activate) => {
   <!-- Listas clases como arreglos-->
   <ul>
     <li
-      v-for="{ id, label, purchased, priority } in items"
+      v-for="({ id, label, purchased, priority }, index) in items"
+      @click="togglePurchased(items[index])"
       v-bind:key="id"
-      :class="{ strikeout: purchased, priority }"
+      :class="{ strikeout: purchased, priority: priority}"
     >
       ⚜ {{ label }}
     </li>
   </ul>
-<!-- Listas clases como arreglos duplicada-->
-<ul>
+  <!-- Listas clases como arreglos duplicada-->
+  <ul>
     <li
       v-for="{ id, label, purchased, priority } in items"
+      :class="{ strikeout: purchased, priority: priority }"
       v-bind:key="id"
-      :class="[purchased?'strikeout':'', priority?'priority':'']"
     >
-      ⚜ {{ label }}
+      🔹 {{ label }}
     </li>
   </ul>
-  <p v-if="items.length === 0">🥀 NO HAY ELEMENTOS AGREGADOS</p>
+  <p v-if="items.length === 0">🥀 No hay elementos en la lista</p>
 </template>
 <style scoped>
 .shopping-cart-icon {
