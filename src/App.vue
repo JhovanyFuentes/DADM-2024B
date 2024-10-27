@@ -44,7 +44,7 @@ const activateEdition = (activate) => {
     <!-- Boton -->
     <button :disabled="newItem.length === 0" class="btn btn-primary">Salvar Articulo</button>
   </form>
-  <!-- Listas-->
+  <!-- Listas original -->
   <ul>
     <li
       v-for="{ label, id, purchased, priority } in items"
@@ -57,19 +57,19 @@ const activateEdition = (activate) => {
   <!-- Listas clases como arreglos-->
   <ul>
     <li
-      v-for="{ label, id, purchased, priority } in items"
-      :key="id"
-      :class="[purchased ? 'strikeout' : '', priority ? 'priority' : '']"
+      v-for="{ id, label, purchased, priority } in items"
+      v-bind:key="id"
+      :class="{ strikeout: purchased, priority }"
     >
-      {{ priority ? '🔥' : '🛒' }} {{ label }}
+      ⚜ {{ label }}
     </li>
   </ul>
-  <ul>
+<!-- Listas clases como arreglos duplicada-->
+<ul>
     <li
       v-for="{ id, label, purchased, priority } in items"
-      class="clase-estatica"
       v-bind:key="id"
-      :class="{ strikeout: purchased, priority: priority}"
+      :class="[purchased?'strikeout':'', priority?'priority':'']"
     >
       ⚜ {{ label }}
     </li>
