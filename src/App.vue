@@ -5,9 +5,7 @@ const editing = ref(false);
 // Funcion que alterna el valor de la variable editing
 const doEdit = (edit)=>{
   editing.value = edit;
-  // Limpiando la entrada de texto
-  // en caso de que se oculte o muestre
-  // el formulario
+
   newItem.value = "";
   newItemHighPriority.value = false;
 };
