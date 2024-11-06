@@ -1,5 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from "vue";
+// Creando una propiedad computada
+const characterCount = computed(()=>{
+  // Toda propiedad computada debe regresar un valor
+  return newItem.value.length;
+});
 // Modo edición
 const editing = ref(false);
 // Funcion que alterna el valor de la variable editing
@@ -55,6 +60,10 @@ const togglePurchased = (item) => {
       class="btn btn-primary">
       Salvar Articulo
     </button>
+    	<!-- Contador -->
+  <p class="counter">
+    {{ characterCount }} / 200
+  </p>
   </form>
   <!-- Lista -->
   <ul>
