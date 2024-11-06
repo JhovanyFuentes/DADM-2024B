@@ -5,6 +5,10 @@ const characterCount = computed(()=>{
   // Toda propiedad computada debe regresar un valor
   return newItem.value.length;
 });
+// Creando propiedad computada que invierte items de la lista
+const reversedItems = computed(() => {
+  return [...items.value].reverse();
+});
 // Modo edición
 const editing = ref(false);
 // Funcion que alterna el valor de la variable editing
@@ -67,11 +71,12 @@ const togglePurchased = (item) => {
   </form>
   <!-- Lista -->
   <ul>
-    <li v-for="({ id, label, purchased, highPriority }, index) in items" 
-      :class="{strikeout: purchased, priority: highPriority}"
-      @click="togglePurchased(items[index])"
-      v-bind:key="id">
-      🔹 {{ label }}
+    <li 
+    v-for="({ id, label, purchased, highPriority }, index) in reversedItems"
+  :class="{ strikeout: purchased, priority: highPriority }" 
+	@click="togglePurchased(reversedItems[index])" 
+  v-bind:key="id">
+	  🔹 {{ label }}
     </li>
   </ul>
   <p v-if="items.length === 0">🥀 No hay elementos en la lista</p>
