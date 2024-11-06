@@ -1,22 +1,25 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import planItem from './components/plan-item.vue';
 </script>
-
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div style="text-align: center;">
+      <span id="logo">ITGAM BOX EXPERIENCES</span>
+      <img src="./assets/logo.png" alt="logo">
     </div>
   </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="content">
+    <h1 class="title">Coffee Plans</h1>
+    <h2 class="subtitle">
+      Viajamos por el mundo para encontrar el mejor café de origen único para ti
+    </h2>
+    <div class="plans">
+      <plan-item>El soltero</plan-item>
+      <plan-item>El Curioso</plan-item>
+      <plan-item>El Adicto</plan-item>
+    </div>
+    </div>
 </template>
-
 <style scoped>
 header {
   line-height: 1.5;
