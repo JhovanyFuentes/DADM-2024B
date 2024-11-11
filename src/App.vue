@@ -18,6 +18,7 @@ import PlanPicker from './components/PlanPicker.vue';
     </div>
 </template>
 <style scoped>
+
 header {
   line-height: 1.5;
 }

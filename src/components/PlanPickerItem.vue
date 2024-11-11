@@ -1,21 +1,34 @@
 <template>
-    <div class="plan">
+    <div @click="selectPlan" class="plan">
       <div class="description">
-        <span class="title">{{ name }}
+        <span class="title">{{ name }} {{ selected ? '😊' : ''}}
         </span>
       </div>
     </div>
   </template>
   
   <script setup>
-  // Usando un macro para definir las props
+  //Importacion de la funcion ref
+import { ref } from 'vue';
+
+// Usando un macro para definir las props
 //defineProps(['name', 'planIcon']);
-defineProps({
+const props = defineProps({
   name :{
   type : String,
   requiered : true,
 }
 })
+//Definir un event
+const emit = defineEmits(['select'])
+//Variable que permite recordar si el plan ha sido seleccionado
+const selected = ref(false)
+// Funcion que permite cambiar el estado de la variable
+const selectPlan = () => {
+  selected.value = true;
+  //Plan ha sido seleccionado
+  emit ('select', props.name);
+}
   </script>
   
   <style scoped>
