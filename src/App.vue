@@ -1,5 +1,6 @@
 <script setup>
 import PlanPicker from './components/PlanPicker.vue';
+import fancyButton from './components/FancyButton.vue';
 import {ref} from 'vue';
 const showPlans = ref(false);
 </script>
@@ -23,6 +24,14 @@ const showPlans = ref(false);
     <PlanPicker v-if="showPlans"/>
 <!-- TODO  --> 
     </div>
+    <div class="content">
+    <fancy-button>
+      <template #icon="{ hover }">
+        {{ hover ? "🌟" : "⭐"}}
+      </template>
+      Hazme Clic
+    </fancy-button>
+  </div>
 </template>
 <style scoped>
 
